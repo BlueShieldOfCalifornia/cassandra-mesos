@@ -9,7 +9,7 @@ If you are running a local Mesos install on your machine the default settings wi
 
 **Steps:**    
 
-1. Download the distribution from the Mesosphere [download server](http://downloads.mesosphere.io/storm/cassandra-mesos-2.0.3.tgz).
+1. Download the distribution (([cassandra-mesos-2.0.3-1.tgz](http://downloads.mesosphere.io/cassandra/cassandra-mesos-2.0.3-1.tgz))) from the Mesosphere download server.
 
 1. Untar it onto the driver machine   
    ```tar xzf cassandra-mesos-*.tgz```
