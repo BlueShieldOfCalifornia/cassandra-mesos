@@ -146,6 +146,7 @@ class CassandraScheduler(masterUrl: String,
       o => !isHostRunning(o.getHostname)
     )) {
 
+      info("have enough nodes: " + haveEnoughNodes(nodes.size))
       if (isOfferGood(offer, nodes) && !haveEnoughNodes(nodes.size)) {
         // Accepting offer
         debug(s"offer $offer")
@@ -212,6 +213,9 @@ class CassandraScheduler(masterUrl: String,
     }.filter {
       !_
     }.size
+
+    info("offers are too small: " + offersTooSmall)
+    info("already running on that host: " + isHostRunning(offer.getHostname))
 
     // don't start the same framework multiple times on the same host and
     // make sure we got all resources we asked for
