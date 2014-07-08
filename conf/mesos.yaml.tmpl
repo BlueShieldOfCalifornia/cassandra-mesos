@@ -1,0 +1,31 @@
+#
+# This file should be placed inside mesos scheduler marathon app archive for cassandra (cassandra-mesos-2.0.9-2.tar.gz),
+# into archive /conf directory
+#
+
+# Cassandra on Mesos download location. Typically not required to be changed.
+mesos.executor.uri: 'https://s3-us-west-1.amazonaws.com/bsc3-shared/cassandra-mesos-2.0.9-2.tgz'
+
+# Where the Mesos master is located
+mesos.master.url: 'zk://<ZK_HOSTS>/mesos'
+
+# Which Zookeeper to use to store our state e.g. 'zkHost:port,zkHost:port'
+state.zk: '<ZK_HOSTS>'
+
+# Where we can find the Mesos library
+# Typical Linux/Unix Mesos lib path
+java.library.path: '/usr/local/lib/libmesos.so'
+
+# Typical OS X mesos path
+#java.library.path: '/usr/local/lib/libmesos.dylib'
+
+# No of HW nodes we want it to run on
+# Driver will block until we have enough nodes
+# (We can't start multiple Cassandra nodes of the same cluster on the same HW node due to port conflicts)
+cassandra.noOfHwNodes: <CASSANDRA_NODES_COUNT>
+
+# Mesos resource requests
+resource.cpus: <CPUS_RES_REQ>
+resource.mem: <MEM_RES_REQ>
+resource.disk: <DISK_RES_REQ>
+#resource.ports: -1
