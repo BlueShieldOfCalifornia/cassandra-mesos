@@ -20,6 +20,9 @@ mv apache-cassandra* cassandra-mesos-${PROJVERSION}
 cp bin/cassandra-mesos cassandra-mesos-${PROJVERSION}/bin
 chmod u+x cassandra-mesos-${PROJVERSION}/bin/cassandra-mesos
 
+cp bin/run_cassandra.sh cassandra-mesos-${PROJVERSION}/bin
+chmod u+x cassandra-mesos-${PROJVERSION}/bin/run_cassandra.sh
+
 cp conf/* cassandra-mesos-${PROJVERSION}/conf
 cp target/*.jar cassandra-mesos*/lib
 
