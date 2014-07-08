@@ -43,6 +43,8 @@ object Main extends App with Logger {
 
   val confServerPort = mesosConf.getOrElse("cassandra.confServer.port", 8282).toString.toInt
 
+  val confServerInternalPort = mesosConf.getOrElse("cassandra.confServer.internalPort", confServerPort).toString.toInt
+
   val confServerHostName = mesosConf.getOrElse("cassandra.confServer.hostname",
     InetAddress.getLocalHost().getHostName()).toString
 
@@ -85,7 +87,7 @@ object Main extends App with Logger {
   scheduler.waitUnitInit
 
   // Start serving the Cassandra config
-  val configServer = new ConfigServer(confServerPort, "conf", scheduler.getHosts(), Slug(clusterName))
+  val configServer = new ConfigServer(confServerInternalPort, "conf", scheduler.getHosts(), Slug(clusterName))
 
   info("Cassandra nodes starting on: " + scheduler.fetchNodeSet().mkString(","))
 

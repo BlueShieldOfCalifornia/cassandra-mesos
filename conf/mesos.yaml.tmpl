@@ -23,6 +23,9 @@ java.library.path: '/usr/local/lib/libmesos.so'
 # Driver will block until we have enough nodes
 # (We can't start multiple Cassandra nodes of the same cluster on the same HW node due to port conflicts)
 cassandra.noOfHwNodes: <CASSANDRA_NODES_COUNT>
+cassandra.confServer.port <CONF_SERVER_PORT>
+cassandra.confServer.internalPort <CONF_SERVER_INTERNAL_PORT>
+cassandra.confServer.hostname <CONF_SERVER_HOSTNAME>
 
 # Mesos resource requests
 resource.cpus: <CPUS_RES_REQ>
