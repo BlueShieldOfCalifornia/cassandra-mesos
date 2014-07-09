@@ -44,8 +44,7 @@ class ConfigServer(port: Int, cassConfigDir: String, seedNodes: mutable.Set[Stri
           line =>
             line.replaceAllLiterally("${seedNodes}", seedNodes
               .mkString(","))
-              .replaceAllLiterally("${clusterName}", clusterNameSlugged
-              .mkString(","))
+              .replaceAllLiterally("${clusterName}", clusterNameSlugged)
         }.mkString("\n")
 
         response.setContentType("application/octet-stream;charset=utf-8")
