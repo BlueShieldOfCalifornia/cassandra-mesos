@@ -1,4 +1,4 @@
-#!/bin/bash -v
+#!/bin/bash 
 
 # Our cassandra-mesos project version follows the Cassandra version number
 PROJVERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v '\[')
@@ -10,7 +10,7 @@ echo Building Cassandra $CASSVERSION for Mesos
 mvn clean package
 
 rm -r cassandra-mesos-*
-wget http://apache.osuosl.org/cassandra/${CASSVERSION}/apache-cassandra-${CASSVERSION}-bin.tar.gz
+wget http://archive.apache.org/dist/cassandra/${CASSVERSION}/apache-cassandra-${CASSVERSION}-bin.tar.gz
 
 tar xzf apache-cassandra*.tar.gz
 rm apache-cassandra*tar.gz
