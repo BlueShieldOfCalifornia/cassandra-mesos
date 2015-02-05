@@ -129,9 +129,12 @@ class CassandraScheduler(masterUrl: String,
     var nodes = fetchNodeSet()
 
     // Construct command to run
+    var hostname = java.net.InetAddress.getLocalHost().getHostName().replace('.', '_');
+    var prefix:String = "collectd."concat(hostname).concat(".cassandra")
+    var command:String = "cd cassandra-mesos* && cd conf && rm cassandra.yaml && sed -i -e 's/GRAPHITE_PREFIX/".concat(prefix).concat("/' metrics-reporter-graphite.yaml && curl -O http://").concat(confServerHostName).concat(":").concat(confServerPort.toString).concat("/cassandra.yaml && cd .. && bin/cassandra -f").toString
     val cmd = CommandInfo.newBuilder
       .addUris(CommandInfo.URI.newBuilder.setValue(execUri))
-      .setValue(s"cd cassandra-mesos* && cd conf && rm cassandra.yaml && sed -i -e 's/GRAPHITE_PREFIX/collectd.`hostname | tr '.' '_'`.cassandra/' metrics-reporter-graphite.yaml && curl -O http://${confServerHostName}:${confServerPort}/cassandra.yaml && cd .. && bin/cassandra -f")
+      .setValue(command)
 
     // Create all my resources
     val res = resources.map {

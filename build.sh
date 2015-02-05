@@ -23,6 +23,9 @@ chmod u+x cassandra-mesos-${PROJVERSION}/bin/cassandra-mesos
 cp bin/run_cassandra.sh cassandra-mesos-${PROJVERSION}/bin
 chmod u+x cassandra-mesos-${PROJVERSION}/bin/run_cassandra.sh
 
+wget http://central.maven.org/maven2/com/yammer/metrics/metrics-graphite/2.2.0/metrics-graphite-2.2.0.jar
+cp metrics-graphite-2.2.0.jar cassandra-mesos-${PROJVERSION}/lib/
+
 cp conf/* cassandra-mesos-${PROJVERSION}/conf
 cp target/*.jar cassandra-mesos*/lib
 
