@@ -10,6 +10,7 @@ echo Building Cassandra $CASSVERSION for Mesos
 mvn clean package
 
 rm -r cassandra-mesos-*
+rm -f metrics-graphite*
 wget http://archive.apache.org/dist/cassandra/${CASSVERSION}/apache-cassandra-${CASSVERSION}-bin.tar.gz
 
 tar xzf apache-cassandra*.tar.gz

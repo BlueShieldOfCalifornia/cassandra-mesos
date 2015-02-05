@@ -128,14 +128,6 @@ class CassandraScheduler(masterUrl: String,
     // Pull back in previous nodes so we can prefer them and reuse the data files on disk
     var nodes = fetchNodeSet()
 
-    // Construct command to run
-    var hostname = java.net.InetAddress.getLocalHost().getHostName().replace('.', '_');
-    var prefix:String = "collectd."concat(hostname).concat(".cassandra")
-    var command:String = "cd cassandra-mesos* && cd conf && rm cassandra.yaml && sed -i -e 's/GRAPHITE_PREFIX/".concat(prefix).concat("/' metrics-reporter-graphite.yaml && curl -O http://").concat(confServerHostName).concat(":").concat(confServerPort.toString).concat("/cassandra.yaml && cd .. && bin/cassandra -f").toString
-    val cmd = CommandInfo.newBuilder
-      .addUris(CommandInfo.URI.newBuilder.setValue(execUri))
-      .setValue(command)
-
     // Create all my resources
     val res = resources.map {
       case (k, v) => ScalarResource(k, v).toProto
@@ -155,6 +147,15 @@ class CassandraScheduler(masterUrl: String,
         debug(s"offer $offer")
 
         info("Accepted offer: " + offer.getHostname)
+
+        // Construct command to run
+        var hostname = offer.getHostname.replace('.', '_');
+        var prefix:String = "collectd."concat(hostname).concat(".cassandra")
+        var command:String = "cd cassandra-mesos* && cd conf && rm cassandra.yaml && sed -i -e 's/GRAPHITE_PREFIX/".concat(prefix).concat("/' metrics-reporter-graphite.yaml && curl -O http://").concat(confServerHostName).concat(":").concat(confServerPort.toString).concat("/cassandra.yaml && cd .. && bin/cassandra -f").toString
+        val cmd = CommandInfo.newBuilder
+          .addUris(CommandInfo.URI.newBuilder.setValue(execUri))
+          .setValue(command)
+        info("Launching command: " + cmd)
 
         val id = "task" + System.currentTimeMillis()
 
